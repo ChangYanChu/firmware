@@ -1656,7 +1656,7 @@ void Screen::setup()
     ui->getUiState()->userData = this;
 
     // Set the utf8 conversion function
-    dispdev->setFontTableLookupFunction(customFontTableLookup);
+    // dispdev->setFontTableLookupFunction(customFontTableLookup);
 
     // Add frames.
     EINK_ADD_FRAMEFLAG(dispdev, DEMAND_FAST);

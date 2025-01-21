@@ -48,6 +48,16 @@ class TFTDisplay : public OLEDDisplay
      */
     static GpioPin *backlightEnable;
 
+    void setFont(const uint8_t *fontData) override;
+
+    uint16_t drawString(int16_t x, int16_t y, const String &text) override;
+
+    void drawXbm(int16_t x, int16_t y, int16_t width, int16_t height, const uint8_t *xbm) override;
+
+    void drawCircle(int16_t x, int16_t y, int16_t radius) override;
+
+    void drawStringf(int16_t x, int16_t y, char *buffer, String format, ...) override;
+
   protected:
     // the header size of the buffer used, e.g. for the SPI command header
     virtual int getBufferOffset(void) override { return 0; }

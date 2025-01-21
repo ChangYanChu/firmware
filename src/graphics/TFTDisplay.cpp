@@ -871,4 +871,57 @@ bool TFTDisplay::connect()
     return true;
 }
 
+void TFTDisplay::drawStringf(int16_t x, int16_t y, char *outBuffer, String format, ...)
+{
+    char tempBuffer[256]; // Define buffer for formatted string
+    va_list args;
+    va_start(args, format);
+    vsnprintf(tempBuffer, sizeof(tempBuffer), format.c_str(), args);
+    va_end(args);
+
+    // Call drawString to render the formatted string
+    drawString(x, y, tempBuffer);
+}
+
+uint16_t TFTDisplay::drawString(int16_t x, int16_t y, const String &text)
+{
+    if (tft)
+    {
+        tft->drawString(text, x, y);
+    }
+    return text.length(); // Return the number of output characters 
+}
+
+void TFTDisplay::setFont(const uint8_t *fontData)
+{
+
+    if (tft)
+    {
+        tft->setFont(&fonts::efontCN_16);
+        LOG_DEBUG("set cn font yes");
+    }
+    else
+    {
+        LOG_DEBUG("set cn font no");
+    }
+}
+
+void TFTDisplay::drawXbm(int16_t xMove, int16_t yMove, int16_t width, int16_t height, const uint8_t *xbm)
+{
+    if (tft)
+    {
+        // Call drawXBitmap or other drawing functions in LovyanGFX
+        tft->drawXBitmap(xMove, yMove, xbm, width, height, 0xFFFF);
+    }
+}
+
+void TFTDisplay::drawCircle(int16_t x, int16_t y, int16_t radius)
+{
+    if (tft)
+    {
+        // Call drawCircle or other drawing functions in LovyanGFX
+        tft->drawCircle(x, y, radius, 0xFFFF);
+    }
+}
+
 #endif
